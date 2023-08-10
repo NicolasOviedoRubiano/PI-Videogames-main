@@ -1,28 +1,57 @@
 const { Router } = require("express");
+const {
+  getAllVideogames,
+  getVideogameById,
+  getCoincidences,
+  createVideogame,
+} = require("../controllers/videogameController");
 
 videogamesRoute = Router();
 
 //*get all or get coincidences (the first 15).
-videogamesRoute.get("/", (req, res) => {
+videogamesRoute.get("/", async (req, res) => {
   try {
-    if (Object.entries(req.query).length) {
-      res.send("ok with the query");
+    let videogames = undefined;
+    if (req.query.name) {
+      const { name } = req.query;
+      videogames = await getCoincidences(name);
     } else {
-      res.send("ok with the get all");
+      videogames = await getAllVideogames();
+      // console.log("the response from the getAllVideogames is--->", videogames);
     }
-  } catch (error) {}
+    const response = { message: "query ok", videogames };
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
+
 //*get one
-videogamesRoute.get("/:id", (req, res) => {
+videogamesRoute.get("/:id", async (req, res) => {
   try {
-    res.send(`ok getting the id--->${req.params.id}`);
-  } catch (error) {}
+    const id = req.params.id;
+    console.log(`The ${id} is NaN--->`, Number(id));
+    const videogame = await getVideogameById(id);
+    console.log("the controller returned--->", videogame);
+    const response = { message: "query ok", videogame };
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
+
 //*post one ---> create a videogame
-videogamesRoute.post("/", (req, res) => {
+videogamesRoute.post("/", async (req, res) => {
   try {
-    res.send("creating a game");
-  } catch (error) {}
+    console.log("entering to the route...");
+    const videogame = req.body;
+    console.log(videogame);
+    const created = await createVideogame(videogame);
+    const response = { message: "query ok", created };
+    res.status(201).json(response);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 module.exports = { videogamesRoute };

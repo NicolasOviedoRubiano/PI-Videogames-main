@@ -18,12 +18,15 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
+const { getAllGenres } = require("./src/controllers/genreControllers.js");
 const { conn } = require("./src/db.js");
 const { SERVER_PORT } = process.env;
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(SERVER_PORT, () => {
+conn.sync({ alter: true }).then(() => {
+  server.listen(SERVER_PORT, async () => {
+    console.log("sync ok, getting the genres");
+    await getAllGenres();
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
