@@ -1,0 +1,61 @@
+.formContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  top: 50px;
+}
+.formContainer h1 {
+  margin: 15px 0px;
+}
+.formContainer section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.formContainer form {
+  width: 350px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.25s ease;
+}
+.formContainer form:hover {
+  border-color: rgb(73, 60, 220);
+  box-shadow: 2px, 2px, 2px;
+}
+.formContainer label {
+  height: fit-content;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.formContainer p {
+  height: min-content;
+  width: fit-content;
+  margin: 0px;
+  color: rgb(255, 43, 43);
+  font-size: 0.7rem;
+}
+.formContainer label input {
+  margin-left: 0px;
+  width: 300px;
+}
+.formContainer label textarea {
+  margin: 0px;
+  width: 300px;
+  height: 2rem;
+}
+.formContainer select {
+  margin-bottom: 10px;
+}

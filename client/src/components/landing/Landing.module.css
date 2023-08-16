@@ -1,0 +1,21 @@
+.landing {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  background-image: url(https://i.pinimg.com/originals/0d/86/78/0d867824d5a19b2f1eee7293e906a3ef.gif);
+  background-size: auto;
+  background-repeat: repeat-x;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing button {
+  width: fit-content;
+}
+.landing h1 {
+  background-color: black;
+  border-radius: 8px;
+}

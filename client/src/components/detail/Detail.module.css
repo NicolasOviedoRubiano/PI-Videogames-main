@@ -1,0 +1,57 @@
+.detail {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 50px;
+}
+.divImage {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin: 0px 25px;
+}
+.detail img {
+  width: 40vw;
+  height: auto;
+  position: fixed;
+  top: 30vh;
+  left: 3.5vw;
+  transition: 0.25s;
+}
+.detail img:hover {
+  box-shadow: 5px 5px 5px rgb(73, 60, 220);
+  width: 41vw;
+}
+.detail section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+.detail section h1 {
+  margin: 10px;
+}
+.detail section h3 {
+  margin: 10px 0px;
+}
+.detail section span {
+  text-align: justify;
+}
+.detail section div {
+  display: flex;
+  flex-direction: row;
+}
+.detail label {
+  margin: 0px 10px;
+  justify-content: center;
+}
+.detail label h5 {
+  margin: 5px 0px;
+}
+.detail ul {
+  margin: 5px 0px;
+  padding: 0px;
+  list-style-type: none;
+}

@@ -33,12 +33,13 @@ async function getAllVideogames() {
       videogamesFromApi = [...videogamesFromApi, ...resultsFiltered];
     }
     const videogamesFromDB = await Videogames.findAll({
-      attributes: ["id", "name"],
+      attributes: ["id", "name", "image", "rating"],
       include: [
         {
           model: Genre,
           as: "genres",
-          attributes: { exclude: ["videogames_genre"] },
+          attributes: ["id", "name"],
+          through: { attributes: [] },
         },
       ],
     });
@@ -107,8 +108,12 @@ async function createVideogame(videogame) {
     },
     includes: [Genre],
   });
+  console.log(newVideogame.name, "vs", videogame.name);
+  console.log(newVideogame.release_date, "vs", videogame.release_date);
   if (created) {
     await newVideogame.setGenres(videogame.genres);
+  } else {
+    console.log("The videogame was not created");
   }
   return created;
 }

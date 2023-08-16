@@ -1,6 +1,35 @@
 .divCard {
-  width: 30vw;
+  width: 350px;
+  height: max-content;
+  margin: 5px;
+  color-scheme: light dark;
+  border-radius: 8px;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  transition: 0.75s ease;
 }
-.img {
-  width: 30vw;
+.divCard:hover {
+  border: 1px solid rgb(73, 60, 220);
+  background-color: rgb(84, 95, 121);
+}
+.divCard img {
+  width: 300px;
+  margin: 5px;
+  transition: 0.25s;
+}
+.divCard:hover {
+  border-color: rgb(73, 60, 220);
+  box-shadow: 2px, 2px, 2px;
+}
+.divCard img:hover {
+  width: 305px;
+  margin: 0px;
+}
+.divCard a {
+  height: fit-content;
+  width: fit-content;
+}
+.divCard ul {
+  width: fit-content;
 }

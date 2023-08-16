@@ -1,0 +1,12 @@
+.barContainer {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px;
+  justify-content: space-between;
+}
+.barContainer input {
+  align-self: center;
+  height: 30px;
+  border-radius: 8px;
+}

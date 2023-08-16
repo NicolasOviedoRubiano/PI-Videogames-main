@@ -1,0 +1,7 @@
+.barContainer {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px;
+  justify-content: space-around;
+}

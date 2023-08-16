@@ -7,7 +7,7 @@ import styles from "./Container.module.css";
 
 export default function Container({ videogames }) {
   return (
-    <div className={styles.Container}>
+    <div className={styles.container}>
       {videogames?.map((videogame) => {
         return (
           <Card
@@ -16,6 +16,7 @@ export default function Container({ videogames }) {
             image={videogame.image}
             name={videogame.name}
             genres={videogame.genres}
+            rating={videogame.rating}
           />
         );
       })}

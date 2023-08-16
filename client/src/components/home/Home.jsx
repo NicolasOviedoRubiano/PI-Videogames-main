@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
-//*libraries
+//*Hooks and actions
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { allVideogames, getGenres } from "../../redux/actions/actions";
 //*components
-import SearchBar from "./searchBar/searchBar";
+import SearchBar from "./searchBar/SearchBar";
 import Container from "./container/Container";
 import ConfigurationBar from "./configurationBar/ConfigurationBar";
 import PaginateBar from "./paginateBar/PaginateBar";
-//*actions
-import { allVideogames, getGenres } from "../../redux/actions";
+//*style
+import styles from "./Home.module.css";
 
 export default function Home(props) {
   const { shownVideogames, genres, page } = useSelector((state) => state);
@@ -19,18 +20,18 @@ export default function Home(props) {
       dispatch(getGenres());
     }
   });
-  const vgPerPage = 5;
+  const vgPerPage = 15;
   let totalPages = Math.floor(shownVideogames?.length / vgPerPage);
   const from = (page - 1) * vgPerPage;
   const to = page * vgPerPage;
   const displayedVideogames = shownVideogames?.slice(from, to);
 
   return (
-    <div>
-      <h1>This is the Home Page</h1>
-      <h2>and it is working ok</h2>
+    <div className={styles.home}>
+      <h1>Videogames House</h1>
       <SearchBar />
       <ConfigurationBar genres={genres} />
+      <PaginateBar totalPages={totalPages}></PaginateBar>
       <Container videogames={displayedVideogames} />
       <PaginateBar totalPages={totalPages}></PaginateBar>
     </div>

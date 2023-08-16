@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
+//*Hooks and actions
 import { useDispatch, useSelector } from "react-redux";
-import { changePage } from "../../../redux/actions";
+import { changePage } from "../../../redux/actions/actions";
+//*Styles
+import styles from "./PaginateBar.module.css";
 
 export default function PaginateBar({ totalPages }) {
   const { page } = useSelector((s) => s);
@@ -14,7 +17,7 @@ export default function PaginateBar({ totalPages }) {
     dispatch(changePage(page + 1));
   };
   return (
-    <div>
+    <div className={styles.barContainer}>
       {page > 1 ? <button onClick={handlerPrev}>PREV</button> : null}
       {/* {page > 2 ? <h3>...</h3> : null} */}
       <div>

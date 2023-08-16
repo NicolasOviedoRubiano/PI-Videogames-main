@@ -1,8 +1,14 @@
 /* eslint-disable no-unused-vars */
+//*Hooks and actions
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { allVideogames, videogamesByName } from "../../../redux/actions";
-
+import {
+  changePage,
+  resetShownVideogames,
+  videogamesByName,
+} from "../../../redux/actions/actions";
+//*Styles
+import styles from "./SearchBar.module.css";
 export default function SearchBar(props) {
   const [NAME, setName] = useState("");
   const dispatch = useDispatch();
@@ -17,19 +23,20 @@ export default function SearchBar(props) {
     setName("");
   };
   const handlerReset = () => {
-    dispatch(allVideogames());
+    dispatch(resetShownVideogames());
+    dispatch(changePage(1));
     setName("");
   };
   return (
-    <div>
+    <div className={styles.barContainer}>
+      <button onClick={handlerReset}>Clean</button>
       <input
         value={NAME}
-        placeholder="Ingrese un nombre"
+        placeholder="Enter a name"
         type="text"
         onChange={handlerChange}
       />
       <button onClick={handlerSearch}>Search</button>
-      <button onClick={handlerReset}>Clean</button>
     </div>
   );
 }

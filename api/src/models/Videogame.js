@@ -80,7 +80,7 @@ module.exports = (sequelize) => {
       // defaultValue: null,
     },
     release_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       // defaultValue: null,
     },

@@ -43,11 +43,11 @@ videogamesRoute.get("/:id", async (req, res) => {
 //*post one ---> create a videogame
 videogamesRoute.post("/", async (req, res) => {
   try {
-    console.log("entering to the route...");
+    console.log("entering to the create route...");
     const videogame = req.body;
-    console.log(videogame);
     const created = await createVideogame(videogame);
     const response = { message: "query ok", created };
+    console.log("The game was created: ", created);
     res.status(201).json(response);
   } catch (error) {
     res.status(400).send(error.message);

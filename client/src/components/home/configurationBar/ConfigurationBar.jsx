@@ -3,16 +3,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
+  changePage,
   filterByGenre,
   filterByOrigin,
   orderByName,
   orderByRating,
-} from "../../../redux/actions";
+} from "../../../redux/actions/actions";
 
 export default function ConfigurationBar({ genres }) {
   const dispatch = useDispatch();
   const handlerFilterbyGenre = (event) => {
     dispatch(filterByGenre(event.target.value));
+    dispatch(changePage(1));
   };
   const handlerOrder = (event) => {
     if (event.target.value === "A-Z") {
@@ -27,20 +29,32 @@ export default function ConfigurationBar({ genres }) {
   };
   const handlerFilterbyOrigin = (event) => {
     dispatch(filterByOrigin(event.target.value));
+    dispatch(changePage(1));
   };
 
   return (
     <div>
-      <select name="Filter by Genre" onChange={handlerFilterbyGenre}>
+      <select
+        name="Filter by Genre"
+        onChange={handlerFilterbyGenre}
+        onClick={handlerFilterbyGenre}
+      >
+        <option value="default">Select Genre</option>
         {genres?.map((genre) => {
           return <option key={genre.id}>{genre.name}</option>;
         })}
       </select>
-      <select name="Filter by Origin" onChange={handlerFilterbyOrigin}>
+      <select
+        name="Filter by Origin"
+        onChange={handlerFilterbyOrigin}
+        onClick={handlerFilterbyOrigin}
+      >
+        <option value="default">Select Origin</option>
         <option value="DataBase">Data Base</option>
         <option value="API">API</option>
       </select>
-      <select name="Order" onClick={handlerOrder}>
+      <select name="Order" onClick={handlerOrder} onChange={handlerOrder}>
+        <option value="default">Select an order</option>
         <option value="A-Z">A-Z</option>
         <option value="Z-A">Z-A</option>
         <option value="asc">Best rating first</option>

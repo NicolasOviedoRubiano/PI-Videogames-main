@@ -11,47 +11,55 @@ import {
   GET_VIDEOGAME_BY_ID,
   CREATE_VIDEOGAME,
   CHANGE_PAGE,
-} from "./actions";
+  RESET,
+  RESET_DETAIL,
+} from "./actions/actionTypes";
 
 const initialState = {
   videogames: [],
+  filteredVideogames: [],
   shownVideogames: [],
   detailVideogame: {},
   genres: [],
   page: 1,
 };
-
 export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_ALL_VIDEOGAMES:
-      return { ...state, videogames: payload, shownVideogames: payload };
+      return {
+        ...state,
+        videogames: payload,
+        shownVideogames: payload,
+        filteredVideogames: payload,
+      };
     case GET_VIDEOGAME_BY_NAME:
       console.log("changing the videogames state");
-      return { ...state, videogames: payload, shownVideogames: payload };
+      return { ...state, shownVideogames: payload };
     case GET_GENRES:
       return { ...state, genres: payload };
+    case RESET:
+      return { ...state, shownVideogames: state.videogames };
     case FILTER_BY_GENRE:
+      if (payload === "default") {
+        return {
+          ...state,
+          shownVideogames: state.videogames,
+          filteredVideogames: state.videogames,
+        };
+      }
       const filteredByGenre = state.videogames.filter((videogame) => {
-        console.log(videogame.genres, "must include", payload);
         return JSON.stringify(videogame.genres).includes(payload);
       });
-      console.log(filteredByGenre);
-      return { ...state, shownVideogames: filteredByGenre };
+      return {
+        ...state,
+        shownVideogames: filteredByGenre,
+        filteredVideogames: filteredByGenre,
+      };
     case FILTER_BY_ORIGIN:
-      const filteredByOrigin = state.videogames.filter((videogame) =>
-        // {
-        //   console.log(
-        //     videogame.id,
-        //     "is a Number:",
-        //     Number.isInteger(videogame.id)
-        //   );
-        //   if (payload === "DataBase") {
-        //     console.log("Payload===DataBase");
-        //     return !Number.isInteger(videogame.id);
-        //   } else {
-        //     return Number.isInteger(videogame.id);
-        //   }
-        // }
+      if (payload === "default") {
+        return { ...state, shownVideogames: state.filteredVideogames };
+      }
+      const filteredByOrigin = state.filteredVideogames.filter((videogame) =>
         payload === "DataBase"
           ? !Number.isInteger(videogame.id)
           : Number.isInteger(videogame.id)
@@ -66,8 +74,8 @@ export default function reducer(state = initialState, { type, payload }) {
       const orderedByName = state.shownVideogames.sort((a, b) => {
         console.log(a.name - b.name);
         return payload
-          ? b.name.localeCompare(a.name)
-          : a.name.localeCompare(b.name);
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name);
       });
       return { ...state, shownVideogames: orderedByName };
     case GET_VIDEOGAME_BY_ID:
@@ -75,9 +83,10 @@ export default function reducer(state = initialState, { type, payload }) {
     case CREATE_VIDEOGAME:
       return { ...state, videogames: [...state.videogames, payload] };
     case CHANGE_PAGE:
-      console.log(payload);
       return { ...state, page: payload };
+    case RESET_DETAIL:
+      return { ...state, detailVideogame: {} };
     default:
-      return state;
+      return { ...state };
   }
 }

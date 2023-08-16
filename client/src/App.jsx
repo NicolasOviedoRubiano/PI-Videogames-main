@@ -2,7 +2,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import preactLogo from "./assets/preact.svg";
 import viteLogo from "/vite.svg";
-// import "./app.css";
+import "./app.css";
 
 //*Components
 import Landing from "./components/landing/Landing";

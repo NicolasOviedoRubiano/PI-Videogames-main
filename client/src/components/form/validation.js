@@ -1,6 +1,5 @@
 export default function Validate(gameData) {
   let errors = {};
-  console.log(gameData);
   if (gameData.name.trim().length === 0) {
     errors.name = "The name field cannot be empty";
   } else if (gameData.name.trim().length > 40) {
