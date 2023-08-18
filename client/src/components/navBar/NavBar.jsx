@@ -8,11 +8,7 @@ import styles from "./NavBar.module.css";
 export default function NavBar(props) {
   return (
     <div className={styles.navBar}>
-      <NavLink
-        activeStyle={styles.navLinkActive}
-        className={styles.navLink}
-        to="/home"
-      >
+      <NavLink className={styles.navLink} to="/home">
         Home
       </NavLink>
       <NavLink

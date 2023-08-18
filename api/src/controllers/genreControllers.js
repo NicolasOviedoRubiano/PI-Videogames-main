@@ -1,15 +1,13 @@
 require("dotenv").config();
 //Dependencies
 const axios = require("axios");
-const { Op } = require("sequelize");
 //Enviroment variables
 const { API_KEY, URL_GENRES } = process.env;
 //Models
-const { Videogames, Genre } = require("../db.js");
+const { Genre } = require("../db.js");
 
 async function getAllGenres() {
   try {
-    console.log("Getting the genres...");
     let allGenres = await Genre.findAll();
     if (allGenres.length === 0) {
       let endpoint = `${URL_GENRES}?key=${API_KEY}`;

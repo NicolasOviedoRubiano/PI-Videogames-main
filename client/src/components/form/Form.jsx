@@ -16,6 +16,7 @@ export default function Form(props) {
   useEffect(() => {
     if (genres.length === 0) dispatch(getGenres());
   });
+
   const [gameData, setGameData] = useState({
     name: "",
     image: "",
@@ -27,6 +28,7 @@ export default function Form(props) {
   });
   const [errors, setErrors] = useState({});
   const [selectedGenres, setSelectedGenres] = useState([]);
+
   const handlerInput = (event) => {
     setGameData({ ...gameData, [event.target.name]: event.target.value });
     setErrors(
@@ -56,10 +58,13 @@ export default function Form(props) {
   };
   const handlerSubmit = (event) => {
     event.preventDefault();
-    if (Object.keys(errors).length === 0) {
-      console.log("Dispatching the create action");
+    setErrors(Validate({ ...gameData, [event.target.name]: genres }));
+
+    if (
+      Object.keys(errors).length === 0 &&
+      Object.values(gameData).toString().trim().replaceAll(",", "").length !== 0
+    ) {
       dispatch(createVideogame(gameData));
-      console.log("Now setting the local states to their defaults values");
       setGameData({
         name: "",
         image: "",
@@ -149,7 +154,7 @@ export default function Form(props) {
           </label>
           <label>
             Genres
-            <select onChange={handlerSelect} multiple="true" name="genres">
+            <select onChange={handlerSelect} multiple={true} name="genres">
               {genres?.map((genre) => {
                 return (
                   <option key={genre.id} value={genre.id}>
